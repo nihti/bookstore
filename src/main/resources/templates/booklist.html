@@ -9,11 +9,13 @@
 		<h1 th:text="'Book list'"></h1>	
 		<table>
 		<!-- String title, String author, String isbn, int year, double price  -->
-			<tr><th>Title</th><th>Author</th><th>Price</th></tr>
+			<tr><th>Title</th><th>Author</th></tr>
 			<tr th:each="book : ${books}">
-				<td  th:text="${book.title}"></td>
-				<td	 th:text="${book.author}"></td>
-				<td  th:text="${book.price}"></td>
+				<td th:text="${book.title}"></td>
+				<td	th:text="${book.author}"></td>
+					<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+				<!-- <td  th:text="${book.price}"></td> -->
 		</table>
+		<a href="/add">Add Book</a>    	
 	</body>
 </html>

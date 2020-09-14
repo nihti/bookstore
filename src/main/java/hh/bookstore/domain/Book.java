@@ -13,17 +13,21 @@ public class Book {
 	private String title, author, isbn;
 	private int year;
 	private double price;
-	
-	public Book() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
 	// Id = column in a table
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@NotNull
 	private Long id;
+	
+	public Book() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Book(String title, String author) {
+		super();
+		this.title = title;
+		this.author = author;
+	}
 
 	public Book(String title, String author, String isbn, int year, double price) {
 		super();
@@ -32,6 +36,14 @@ public class Book {
 		this.isbn = isbn;
 		this.year = year;
 		this.price = price;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTitle() {

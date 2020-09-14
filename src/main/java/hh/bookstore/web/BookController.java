@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import hh.bookstore.domain.Book;
 import hh.bookstore.domain.BookRepository;
 
 import java.util.ArrayList;
@@ -32,4 +33,22 @@ public class BookController {
 		model.addAttribute("books", bookrepo.findAll());
 		return "booklist";
 	}
+	
+	@RequestMapping("/add")
+	public String addBook(Model model) {
+		model.addAttribute("book", new Book());
+		return "addbook";
+	}
+	
+    @PostMapping("/save")
+    public String save(Book book){
+        bookrepo.save(book);
+        return "redirect:booklist";
+    }
+    
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable("id") Long bookId, Model model) {
+    	bookrepo.deleteById(bookId);
+    	return "redirect:../booklist";
+    }
 }

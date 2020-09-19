@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.bookstore.domain.Book;
 import hh.bookstore.domain.BookRepository;
+import hh.bookstore.domain.CategoryRepository;
+
 
 import java.util.ArrayList;
 
@@ -22,6 +24,9 @@ public class BookController {
 	
 	@Autowired
 	private BookRepository bookrepo;
+	
+	@Autowired
+	private CategoryRepository caterepo;
 
 	@RequestMapping("/index")
 	public String index() {
@@ -31,12 +36,15 @@ public class BookController {
 	@RequestMapping("/booklist")
 	public String listBooks(Model model) {
 		model.addAttribute("books", bookrepo.findAll());
+		
 		return "booklist";
 	}
 	
+	// Add
 	@RequestMapping("/add")
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());
+		model.addAttribute("categories", caterepo.findAll());
 		return "addbook";
 	}
 	
@@ -52,9 +60,11 @@ public class BookController {
     	return "redirect:../booklist";
     }
     
+    // Edit 
     @GetMapping("/edit/{id}")
     public String editBook(@PathVariable("id") Long bookId, Model model) {
     	model.addAttribute("book", bookrepo.findById(bookId));
+    	model.addAttribute("categories", caterepo.findAll());
     	return "editbook";
     }
 }

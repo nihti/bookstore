@@ -18,6 +18,8 @@ import hh.bookstore.domain.CategoryRepository;
 
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class BookController {
@@ -38,6 +40,18 @@ public class BookController {
 		model.addAttribute("books", bookrepo.findAll());
 		
 		return "booklist";
+	}
+	
+	// REST
+	@GetMapping("/rest")
+	public @ResponseBody List<Book> bookListRest() {
+		return (List <Book>) bookrepo.findAll();
+	}
+	
+	// REST id
+	@GetMapping("book/{id}")
+		public @ResponseBody Optional<Book> findBook(@PathVariable("id") Long bookId) {
+			return bookrepo.findById(bookId);
 	}
 	
 	// Add

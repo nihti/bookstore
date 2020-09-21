@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Book {
 	@Id
@@ -18,6 +20,7 @@ public class Book {
 	// Id = column in a table
 	
 	@ManyToOne
+	@JsonManagedReference
 	@JoinColumn(name = "categoryid")
 	private Category category;
 	

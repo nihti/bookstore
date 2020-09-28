@@ -1,12 +1,14 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 		xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Booklist listing page</title>
 	</head>
 	<body>
-		<h1 th:text="'Book list'"></h1>	
+		<h1 th:text="'Book list'"></h1>
+		<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 		<table>
 		<!-- String title, String author, String isbn, int year, double price  -->
 			<tr><th>Title</th><th>Author</th><th>Category</th></tr>
@@ -14,10 +16,11 @@
 				<td th:text="${book.title}"></td>
 				<td	th:text="${book.author}"></td>
 				<td th:text="${book.category.name}"></td>
-					<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+					<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
 					<td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>    
 				<!-- <td  th:text="${book.price}"></td> -->
 		</table>
-		<a href="/add">Add Book</a>    	
+		<a href="/add">Add Book</a>
+		<form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out"/></form>
 	</body>
 </html>

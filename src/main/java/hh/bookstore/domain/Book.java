@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.data.repository.query.Param;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -15,9 +17,13 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO) // muutettu AUTO:sta IDENTITY:ksi
 	private Long id; // annotaatio @notnull poistettu niin rupesi toimimaan
-	private String title, author;
+	
+	
+	private String title;
 	// private double price;
 	// Id = column in a table
+	
+	private String author;
 	
 	@ManyToOne
 	@JsonManagedReference

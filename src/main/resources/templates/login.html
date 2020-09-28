@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Login page</title>
+	</head>
+	<body>
+		<h1 th:text="'Login sivu'"></h1>	
+		<div th:if="${param.error}">Invalid username or password.</div>
+		<form th:action="@{/login}"method="post">
+			<div><label>Käyttäjätunnus: <input type="text"name="username"/></label></div>
+			<div><label>Salasana: <input type="password"name="password"/></label></div>
+			<div><input type="submit" value="Kirjaudu sisään"/></div>
+		</form>
+	</body>
+</html>
